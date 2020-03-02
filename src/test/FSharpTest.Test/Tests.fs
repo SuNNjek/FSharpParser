@@ -3,12 +3,13 @@ namespace FSharpTest.Test
 open System
 open Microsoft.VisualStudio.TestTools.UnitTesting
 open FSharpParser.Parser
+open FSharpParser.Primitives
 
 [<TestClass>]
 type TestClass () =
     [<TestMethod>]
     member _.TestParseInt () =
-        let results = (pint |>> Int32.Parse) "42"
+        let results = (pInt |>> Int32.Parse) "42"
         Assert.AreEqual(1, results.Length)
 
         let result, rest = results.[0]
@@ -17,7 +18,7 @@ type TestClass () =
 
     [<TestMethod>]
     member _.TestParseWords () =
-        let results = "Hello World!" |> many (pspaced pword)
+        let results = "Hello World!" |> many (pSpaced pWord)
         Assert.AreEqual(1, results.Length)
 
         let result, rest = results.[0]

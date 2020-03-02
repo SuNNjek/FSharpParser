@@ -2,6 +2,7 @@ namespace FSharpParser
 
 module Primitives =
     open System
+    open FSharpParser.Helper
     open FSharpParser.Parser
 
     (* Primitives *)
@@ -12,29 +13,40 @@ module Primitives =
             []
     )
 
+    let maybe (p: 'a Parser) = toParser (fun input ->
+        match p input with
+        | [] -> [(None, input)]
+        | results -> results |> List.map (fun (v, out) -> (Some v, out))
+    )
+
     let satisfy p = parse {
         let! c = anyChar
         if p c then return c
     }
 
     let rec satisfyMany p = parse {
-        let! c = anyChar
+        let! head = anyChar
 
-        if p c then
-            let! rest = satisfyMany p <|> parseEmptyString
-            return String.Concat(c, rest)
+        if p head then
+            match! maybe (satisfyMany p) with
+                        | None -> return string head
+                        | Some rest -> return String.Concat(head, rest)
     }
 
-    let satisfyManyOrNone p = satisfyMany p <|> parseEmptyString
+    let satisfyManyOrNone p = 
+        maybe (satisfyMany p) |>> function
+        | None -> ""
+        | Some str -> str
 
     let rec many p = parse {
         let! head = p
-        let! tail = many p <|> parseEmpty
 
-        return head :: tail
+        match! maybe (many p) with
+                | None -> return [head]
+                | Some tail -> return head :: tail
     }
 
-    let pChar c = satisfy (fun v -> v.Equals(c))
+    let pChar c = satisfy (eq c)
 
     let pDigit = satisfy Char.IsDigit
     let pLetter = satisfy Char.IsLetter

@@ -14,11 +14,10 @@ module Parser =
     let parseNothing<'a> = toParser<'a> (fun _ -> [])
 
     (* Operators *)
-    let (>>=) (p: 'a Parser) (f: 'a -> 'b Parser): 'b Parser = toParser (fun input ->
-        match p input with
+    let (>>=) (p: 'a Parser) (f: 'a -> 'b Parser): 'b Parser =
+        p >> function
         | [] -> []
         | results -> results |> List.map (fun (v, out) -> (f v) out) |> flatten
-    )
 
     let (<|>) (p1: 'a Parser) (p2: 'a Parser) = toParser (fun input ->
         match p1 input with

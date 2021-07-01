@@ -1,30 +1,31 @@
 namespace FSharpTest.Test
 
 open System
-open Microsoft.VisualStudio.TestTools.UnitTesting
+open NUnit.Framework
+open FsUnit
 open FSharpParser.Parser
 open FSharpParser.Primitives
 
-[<TestClass>]
+[<TestFixture>]
 type TestClass () =
-    [<TestMethod>]
+    [<Test>]
     member _.TestParseInt () =
         let results = (pInt |>> Int32.Parse) "42"
-        Assert.AreEqual(1, results.Length)
+        results |> should haveLength 1
 
         let result, rest = results.[0]
-        Assert.AreEqual(42, result)
-        Assert.AreEqual(0, rest.Length)
+        result |> should equal 42
+        rest |> should haveLength 0
 
-    [<TestMethod>]
+    [<Test>]
     member _.TestParseWords () =
         let results = "Hello World!" |> many (pSpaced pWord)
-        Assert.AreEqual(1, results.Length)
+        results |> should haveLength 1
 
         let result, rest = results.[0]
-        Assert.AreEqual(2, result.Length)
-        Assert.AreEqual(0, rest.Length)
+        result |> should haveLength 2
+        rest |> should haveLength 0
 
-        Assert.AreEqual("Hello", result.[0])
-        Assert.AreEqual("World!", result.[1])
+        result.[0] |> should equal "Hello"
+        result.[1] |> should equal "World!"
 

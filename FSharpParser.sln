@@ -13,6 +13,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{B631A168-D
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSharpTest.Test", "src\test\FSharpTest.Test\FSharpTest.Test.fsproj", "{F63B7EA1-6EE3-4D32-9041-2EC240842167}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_SolutionFiles", "_SolutionFiles", "{F37278E0-9DED-4677-A7E3-BC98A2B3600A}"
+ProjectSection(SolutionItems) = preProject
+	Directory.Build.props = Directory.Build.props
+	README.md = README.md
+	.github\workflows\test.yml = .github\workflows\test.yml
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

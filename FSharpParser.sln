@@ -11,7 +11,7 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSharpParser", "src\lib\FSh
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{B631A168-D9E1-48FA-B6C5-E6FD07F813B8}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSharpTest.Test", "src\test\FSharpTest.Test\FSharpTest.Test.fsproj", "{F63B7EA1-6EE3-4D32-9041-2EC240842167}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSharpParser.Test", "src\test\FSharpParser.Test\FSharpParser.Test.fsproj", "{F63B7EA1-6EE3-4D32-9041-2EC240842167}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_SolutionFiles", "_SolutionFiles", "{F37278E0-9DED-4677-A7E3-BC98A2B3600A}"
 ProjectSection(SolutionItems) = preProject

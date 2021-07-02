@@ -1,4 +1,4 @@
-namespace FSharpTest.Test
+namespace FSharpParser.Test
 
 open System
 open NUnit.Framework

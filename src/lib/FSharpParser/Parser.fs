@@ -6,9 +6,11 @@ module Parser =
     type ParserResult<'a> = ('a * string)
     type Parser<'a> = string -> ParserResult<'a> list
 
-    let toParser (f: string -> ParserResult<'a> list): 'a Parser = f
+    let toParser<'a> (f: string -> ParserResult<'a> list): 'a Parser = f
 
-    let parseValue v = toParser (fun input -> [(v, input)])
+    let parseValue<'a> v : Parser<'a> =
+        toParser (fun input -> [(v, input)])
+
     let parseEmpty<'a> = parseValue<'a list> []
     let parseEmptyString = parseValue ""
     let parseNothing<'a> = toParser<'a> (fun _ -> [])

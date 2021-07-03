@@ -31,8 +31,8 @@ jobs:
         run: dotnet restore --locked-mode
       - name: Build
         run: dotnet build --no-restore
-      - name: test
-        run: dotnet test --no-build --collect:"XPlat Code Coverage"
+      - name: Run tests
+        run: dotnet test --no-build
       - name: Upload coverage
         uses: codecov/codecov-action@v1.5.2
         with:
